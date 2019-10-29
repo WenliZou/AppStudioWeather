@@ -3,6 +3,8 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1
 import QtQuick.Controls.Material 2.1
 
+import ArcGIS.AppFramework 1.0
+
 Page {
     id: page
 
@@ -47,6 +49,7 @@ Page {
             }
         }
     }
+
     Rectangle{
         anchors.fill: parent
         color: app.appBackgroundColor
@@ -62,6 +65,27 @@ Page {
         }
     }
 
+    TabBar {
+        Material.background: app.appBackgroundColor
+        Material.accent: app.accentColor
+        padding: 0
+        Repeater {
+            model: tabViewModel
+            TabButton {
+                text: name
+            }
+        }
+        onCurrentIndexChanged: {
+            navigateToPage(currentIndex);
+        }
+    }
+
+    Loader{
+        id: loader
+        anchors.fill: parent
+    }
+
+    
     OptionsMenuPanel{
         id:optionsPanel
         x: page.width-optionsPanel.width-8*app.scaleFactor

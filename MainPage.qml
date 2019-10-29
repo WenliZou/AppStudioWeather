@@ -8,12 +8,7 @@ import ArcGIS.AppFramework 1.0
 Page {
     id:page
 
-    Loader{
-        id: loader
-        anchors.fill: parent
-    }
-
-    footer:TabBar {
+    footer: TabBar {
         Material.background: app.appBackgroundColor
         Material.accent: app.accentColor
         padding: 0
@@ -27,6 +22,12 @@ Page {
             navigateToPage(currentIndex);
         }
     }
+
+    Loader{
+        id: loader
+        anchors.fill: parent
+    }
+
 
     function navigateToPage(index){
 
