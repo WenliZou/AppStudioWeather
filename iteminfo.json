@@ -1,0 +1,52 @@
+{
+    "access": "public",
+    "accessInformation": "AppStudio Team",
+    "appCategories": [
+    ],
+    "avgRating": 0,
+    "banner": null,
+    "categories": [
+    ],
+    "commentsEnabled": true,
+    "created": 1502494913000,
+    "culture": "en-au",
+    "description": "<p style=' margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;'>This layout follows the Google Material design style. This layout is useful if you would like to build an app which has a page with Multiple tabs. QML TabBar control has been used in this layout. This can run on all supported mobile and desktop devices.</p>\n<p style='-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;'><br /></p>\n<p style=' margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;'><br /></p>",
+    "documentation": null,
+    "extent": [
+    ],
+    "groupDesignations": null,
+    "guid": null,
+    "industries": [
+    ],
+    "languages": [
+    ],
+    "largeThumbnail": null,
+    "licenseInfo": null,
+    "listed": false,
+    "modified": 1565997161000,
+    "numComments": 3,
+    "numRatings": 0,
+    "numViews": 613,
+    "orgId": "2U3NfasNQ9o9LkLt",
+    "properties": null,
+    "proxyFilter": null,
+    "scoreCompleteness": 81,
+    "screenshots": [
+    ],
+    "size": 35429,
+    "snippet": "This layout will help you to get started with the basic app containing Tab View control.",
+    "spatialReference": null,
+    "thumbnail": "thumbnail/thumbnail.png",
+    "title": "Tab Layout (Material Design)",
+    "type": "Native Application",
+    "typeKeywords": [
+        "API_QML",
+        "App",
+        "Application",
+        "AppStudio",
+        "Configuration",
+        "Native",
+        "qml"
+    ],
+    "url": null
+}
