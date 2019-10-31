@@ -43,7 +43,11 @@ App{
     readonly property color appDialogColor: lightTheme? "#FFFFFF":"424242"
     readonly property color appPrimaryTextColor: lightTheme? "#000000":"#FFFFFF"
     readonly property color appSecondaryTextColor: Qt.darker(appPrimaryTextColor)
+<<<<<<< HEAD
+    readonly property color primaryColor:"#2297F5"
+=======
     readonly property color primaryColor:"#3F51B5"
+>>>>>>> 1924d7ddd00119084db9529e89eb96b0e7550808
     readonly property color accentColor: Qt.lighter(primaryColor,1.2)
     readonly property color headerTextColor:"#FFFFFF"
     readonly property color listViewDividerColor:"#19000000"
@@ -56,12 +60,50 @@ App{
     readonly property real captionFontSize: 0.6 * app.baseFontSize
 
 
+<<<<<<< HEAD
+    Loader{
+        id: loader
+        anchors.fill: parent
+        sourceComponent:page1ViewPage
+=======
     MainPage{
         anchors.fill: parent
+>>>>>>> 1924d7ddd00119084db9529e89eb96b0e7550808
     }
 
     ListModel{
         id: tabViewModel
+<<<<<<< HEAD
+        ListElement { name: qsTr("TODAY"); }
+        ListElement { name: qsTr("TOMORROW"); }
+        ListElement { name: qsTr("LATER"); }
+    }
+    Component{
+        id: page1ViewPage
+        AddressPage{
+             descText: qsTr("London, GB")
+        }
+    }
+    Component{
+        id: todayView
+        ContentPage{
+             descText: qsTr("Today")
+        }
+    }
+    Component{
+        id: tomorrowView
+        ContentPage{
+            descText: qsTr("Tomorrow")
+        }
+    }
+    Component{
+        id: laterView
+        ContentPage{
+            descText: qsTr("Later")
+        }
+    }
+
+=======
         ListElement { name: qsTr("Item 1"); }
         ListElement { name: qsTr("Item 2"); }
         ListElement { name: qsTr("Item 3"); }
@@ -92,6 +134,7 @@ App{
             descText: qsTr("Item 4")
         }
     }
+>>>>>>> 1924d7ddd00119084db9529e89eb96b0e7550808
 }
 
 

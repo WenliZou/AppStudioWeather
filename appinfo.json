@@ -1,5 +1,18 @@
 {
     "arcgisRuntime": 0,
+<<<<<<< HEAD
+    "deployment": {
+        "android": {
+        },
+        "arcgisRuntimeExtensionsLicense": "",
+        "arcgisRuntimeLicense": "",
+        "ios": {
+            "codeSignIdentity": ""
+        },
+        "macos": {
+            "codeSignIdentity": ""
+        },
+=======
     "capabilities": {
         "audio": false,
         "backgroundModes": {
@@ -54,10 +67,18 @@
             "packageName": "",
             "productID": ""
         },
+>>>>>>> 1924d7ddd00119084db9529e89eb96b0e7550808
         "winphone": {
             "packageDisplayName": ""
         }
     },
+<<<<<<< HEAD
+    "display": {
+        "desktop": {
+            "fullScreen": false,
+            "minimumHeight": 0,
+            "minimumWidth": 0
+=======
     "devicesTypes": [
         "desktop",
         "tablet",
@@ -68,10 +89,21 @@
             "minimumHeight": 0,
             "minimumWidth": 0,
             "windowMode": "default"
+>>>>>>> 1924d7ddd00119084db9529e89eb96b0e7550808
         },
         "enableHighDpi": true,
         "phone": {
             "landscape": true,
+<<<<<<< HEAD
+            "portrait": true
+        },
+        "tablet": {
+            "landscape": true,
+            "portrait": true
+        }
+    },
+    "mainFile": "MyApp.qml",
+=======
             "portrait": true,
             "showStatusBar": true
         },
@@ -90,6 +122,7 @@
     ],
     "mainFile": "MyApp.qml",
     "multipleInstances": true,
+>>>>>>> 1924d7ddd00119084db9529e89eb96b0e7550808
     "projectFile": "MyApp.qmlproject",
     "properties": {
     },
@@ -100,7 +133,10 @@
         "launchImageOverlay": "launchimage-overlay.png"
     },
     "type": "app",
+<<<<<<< HEAD
+=======
     "urlScheme": "",
+>>>>>>> 1924d7ddd00119084db9529e89eb96b0e7550808
     "version": {
         "major": 1,
         "micro": 1
