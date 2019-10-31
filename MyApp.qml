@@ -67,6 +67,7 @@ App{
         ListElement { name: qsTr("TODAY"); }
         ListElement { name: qsTr("TOMORROW"); }
         ListElement { name: qsTr("LATER"); }
+        ListElement { name: qsTr("TWEETS"); }
     }
     Component{
         id: page1ViewPage
@@ -90,6 +91,12 @@ App{
         id: laterView
         ContentPage{
             descText: qsTr("Later")
+        }
+    }
+    Component{
+        id: tweetView
+        ContentPage{
+            descText: qsTr("Tweet")
         }
     }
 }

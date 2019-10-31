@@ -10,14 +10,14 @@ Page {
         contentHeight: 56*app.scaleFactor
         Material.primary: app.primaryColor
         background: Rectangle {
-                 implicitHeight: 40
-                 color: app.primaryColor
-                 Rectangle {
-                     width: parent.width
-                     anchors.bottom: parent.bottom
-                     color: "transparent"
-                 }
-           }
+            implicitHeight: 40
+            color: app.primaryColor
+            Rectangle {
+                width: parent.width
+                anchors.bottom: parent.bottom
+                color: "transparent"
+            }
+        }
         RowLayout {
             anchors.fill: parent
             spacing: 0
@@ -187,47 +187,58 @@ Page {
             source: "./assets/rain.png"
             fillMode: Image.PreserveAspectFit
             mipmap: true
-            }
+        }
     }
-     TabBar {
-         id:dateSelect
-         anchors.top:weather.bottom;
-         width: parent.width
-         Material.background: app.primaryColor
-         Material.accent: app.headerTextColor
-         padding: 0
-         Repeater {
-                model: tabViewModel
-                TabButton {
-                   text: name
-                   font.bold: true
+    TabBar {
+        id:dateSelect
+        anchors.top:weather.bottom
+        width: parent.width
+        Material.background: app.primaryColor
+        Material.accent: app.headerTextColor
+        padding: 0
+        Repeater {
+            model: tabViewModel
+            TabButton {
+                id:middleTab
+                text: name
+                font.bold: true
+                opacity: enabled ? 1.0 : 0.3
+                contentItem: Text{
+                    font: middleTab.font
+                    text: "<font color='#fefefe'>" + middleTab.text + "</font>"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
                 }
             }
-            onCurrentIndexChanged: {
-                navigateToPage(currentIndex);
-            }
         }
-     Loader{
-         id: date_loader
-         anchors.top:dateSelect.bottom;
-         height: parent.height-280-dateSelect.height
-         width:parent.width
-     }
+        onCurrentIndexChanged: {
+            navigateToPage(currentIndex);
+        }
+    }
+    Loader{
+        id: date_loader
+        anchors.top:dateSelect.bottom;
+        height: parent.height-280-dateSelect.height
+        width:parent.width
+    }
 
-     function navigateToPage(index){
-         switch(index){
-         case 0:
-             date_loader.sourceComponent = todayView;
-             break;
-         case 1:
-             date_loader.sourceComponent = tomorrowView;
-             break;
-         case 2:
-             date_loader.sourceComponent = laterView;;
-             break;
-         default:
-             break;
-         }
+    function navigateToPage(index){
+        switch(index){
+        case 0:
+            date_loader.sourceComponent = todayView;
+            break;
+        case 1:
+            date_loader.sourceComponent = tomorrowView;
+            break;
+        case 2:
+            date_loader.sourceComponent = laterView;
+            break;
+        case 3:
+            date_loader.sourceComponent = tweetView;
+            break;
+        default:
+            break;
+        }
 
-     }
+    }
 }
