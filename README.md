@@ -4,6 +4,17 @@
 ![alt text](https://github.com/WenliZou/AppStudioWeather/blob/master/ScreenshotsPage1.PNG)
 
 
-Page 1 UI Design By Oct.31st 
+By Nov.1st 
 
-Add Page title, Text Views, Tabbuttons and ListViews
+Add Tab Button for Tweet. 
+
+Read the doc of OpenWeatherApi
+
+By Oct.31st 
+
+Page 1 UI Design 
+
+Add Page title, Text Views, Tabbuttons and ListView
+
+
+
