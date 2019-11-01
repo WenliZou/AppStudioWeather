@@ -61,9 +61,21 @@ Page {
                     Text {
                         id: name
                         text: weathertype
+                        font.pixelSize:app.baseFontSize*0.7
+                    }
+                    Label{
+                        id:test2
+                        //                leftPadding: 20
+                        //                topPadding: 5
+                        anchors.top:name.bottom
+                        font.pixelSize: app.baseFontSize*0.5
+                        wrapMode: Text.Wrap
+                        color: grey
+                        text: "Light Intensity shower rain"
                     }
                 }
             }
+
             Rectangle{
                 anchors.left:weatherName.right
                 width: parent.width/2
