@@ -6,6 +6,7 @@ import QtQuick.Controls.Material 2.1
 Page {
     id: page
     property var descText
+    property var temperatureNumber
     header: ToolBar{
         contentHeight: 56*app.scaleFactor
         Material.primary: app.primaryColor
@@ -97,14 +98,24 @@ Page {
             topPadding: 5
             wrapMode: Text.Wrap
             color: app.headerTextColor
-            text: "4.7°C"
+            text: temperatureNumber > ""? temperatureNumber+"°F":""
         }
-
+        Label{
+            id:tempMinMax
+            leftPadding: 20
+            topPadding: 5
+            anchors.top:temperature.bottom
+            Material.theme: app.lightTheme? Material.Light : Material.Dark
+            font.pixelSize: app.titleFontSize*0.7
+            wrapMode: Text.Wrap
+            color: app.headerTextColor
+            text: "UV Index: Low"
+        }
         Label{
             id:weatherInfo
             leftPadding: 20
             topPadding: 5
-            anchors.top:temperature.bottom
+            anchors.top:tempMinMax.bottom
             Material.theme: app.lightTheme? Material.Light : Material.Dark
             font.pixelSize: app.baseFontSize*0.7
             wrapMode: Text.Wrap
@@ -114,7 +125,7 @@ Page {
         Label{
             id:wind
             leftPadding: 20
-            topPadding: 7
+            topPadding: 15
             anchors.top: weatherInfo.bottom
             Material.theme: app.lightTheme? Material.Light : Material.Dark
             font.pixelSize: app.titleFontSize*0.7
@@ -166,18 +177,8 @@ Page {
             color: app.headerTextColor
             text: "Sunset: 17:32"
         }
-        Label{
-            id:uvIndex
-            leftPadding: 20
-            topPadding: 5
-            anchors.top:sunset.bottom
-            Material.theme: app.lightTheme? Material.Light : Material.Dark
-            font.pixelSize: app.titleFontSize*0.7
-            wrapMode: Text.Wrap
-            color: app.headerTextColor
-            text: "UV Index: Low"
-        }
         Image{
+            id:weatherIcon
             width: parent.width*0.3
             height: parent.height*0.3
             anchors.right:parent.right
@@ -187,6 +188,18 @@ Page {
             source: "./assets/rain.png"
             fillMode: Image.PreserveAspectFit
             mipmap: true
+        }
+        Label{
+            id:lastUpdateTime
+            rightPadding: 35
+            topPadding: 15
+            anchors.top: weatherIcon.bottom
+            anchors.right:parent.right
+            Material.theme: app.lightTheme? Material.Light : Material.Dark
+            font.pixelSize: app.titleFontSize*0.5
+            wrapMode: Text.Wrap
+            color: app.headerTextColor
+            text: "Last Update: 15:33"
         }
     }
     TabBar {

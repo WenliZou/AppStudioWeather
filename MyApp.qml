@@ -55,6 +55,32 @@ App{
     readonly property real titleFontSize: 1.1 * app.baseFontSize
     readonly property real captionFontSize: 0.6 * app.baseFontSize
 
+    property var locationName:qsTr("Redlands, US")
+    //Want to put it in a key-value pair in the future
+    property var tempNow
+    property var weatherNow
+    property var name: value
+
+
+    Component.onCompleted: getWeather()
+
+    function getWeather(){
+        var xhr = new XMLHttpRequest
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                var responseJSON = JSON.parse(xhr.responseText)
+                weatherNow = responseJSON.weather[0].main
+                tempNow = responseJSON.main.temp
+                tempNow=(tempNow-273.15)*9/5+32
+            }
+        }
+
+        // Define the target of your request
+        xhr.open("GET", "http://api.openweathermap.org/data/2.5/weather?q=Redlands,us&APPID=52235241a93c5deb2028c99639c90403")
+        // Execute the request
+        xhr.send()
+        return tempNow
+    }
 
     Loader{
         id: loader
@@ -72,13 +98,14 @@ App{
     Component{
         id: page1ViewPage
         AddressPage{
-             descText: qsTr("London, GB")
+            descText: locationName
+            temperatureNumber: Math.round(tempNow)
         }
     }
     Component{
         id: todayView
         ContentPage{
-             descText: qsTr("Today")
+            descText: qsTr("Today")
         }
     }
     Component{
