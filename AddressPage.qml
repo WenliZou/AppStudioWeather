@@ -7,6 +7,15 @@ Page {
     id: page
     property var descText
     property var temperatureNumber
+    property var tempMinNumber
+    property var tempMaxNumber
+    property var weatherinfoStc
+    property var windSpeed
+    property var pressureNumber
+    property var humidityPercent
+    property var sunriseTime
+    property var sunsetTime
+    property var dataCollectedTime
     header: ToolBar{
         contentHeight: 56*app.scaleFactor
         Material.primary: app.primaryColor
@@ -109,7 +118,7 @@ Page {
             font.pixelSize: app.titleFontSize*0.7
             wrapMode: Text.Wrap
             color: app.headerTextColor
-            text: "UV Index: Low"
+            text: (tempMinNumber > "" && tempMaxNumber> "")? tempMinNumber+"°F ~ "+tempMaxNumber+"°F":""
         }
         Label{
             id:weatherInfo
@@ -120,7 +129,7 @@ Page {
             font.pixelSize: app.baseFontSize*0.7
             wrapMode: Text.Wrap
             color: app.headerTextColor
-            text: "Light Intensity shower rain"
+            text: weatherinfoStc > ""? weatherinfoStc:""
         }
         Label{
             id:wind
@@ -131,7 +140,7 @@ Page {
             font.pixelSize: app.titleFontSize*0.7
             wrapMode: Text.Wrap
             color: app.headerTextColor
-            text: "Wind: 4.6 m/s "
+            text: windSpeed > ""? "Wind: " +windSpeed+" miles/s":""
         }
         Label{
             id:pressure
@@ -142,7 +151,7 @@ Page {
             font.pixelSize: app.titleFontSize*0.7
             wrapMode: Text.Wrap
             color: app.headerTextColor
-            text: "Pressure: 1000.0 hPa"
+            text: pressureNumber > ""? "Pressure: " +pressureNumber+" hpa":""
         }
         Label{
             id:humidity
@@ -153,7 +162,7 @@ Page {
             font.pixelSize: app.titleFontSize*0.7
             wrapMode: Text.Wrap
             color: app.headerTextColor
-            text: "Humidity: 100%"
+            text: humidityPercent > ""? "Humidity: " +humidityPercent+" %":""
         }
         Label{
             id:sunrise
@@ -164,7 +173,7 @@ Page {
             font.pixelSize: app.titleFontSize*0.7
             wrapMode: Text.Wrap
             color: app.headerTextColor
-            text: "Sunrise: 08:52"
+            text: sunriseTime > ""? "Sunrise: "+sunriseTime:""
         }
         Label{
             id:sunset
@@ -175,7 +184,7 @@ Page {
             font.pixelSize: app.titleFontSize*0.7
             wrapMode: Text.Wrap
             color: app.headerTextColor
-            text: "Sunset: 17:32"
+            text: sunsetTime > ""? "Sunset: "+sunsetTime:""
         }
         Image{
             id:weatherIcon
@@ -191,7 +200,7 @@ Page {
         }
         Label{
             id:lastUpdateTime
-            rightPadding: 35
+//            rightPadding: 15
             topPadding: 15
             anchors.top: weatherIcon.bottom
             anchors.right:parent.right
@@ -199,7 +208,7 @@ Page {
             font.pixelSize: app.titleFontSize*0.5
             wrapMode: Text.Wrap
             color: app.headerTextColor
-            text: "Last Update: 15:33"
+            text: dataCollectedTime > ""? "Last Update: \n"+dataCollectedTime:""
         }
     }
     TabBar {

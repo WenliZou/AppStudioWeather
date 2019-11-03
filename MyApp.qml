@@ -59,6 +59,15 @@ App{
     //Want to put it in a key-value pair in the future
     property var tempNow
     property var weatherNow
+    property var tempMinNumberNow
+    property var tempMaxNumberNow
+    property var windSpeedNow
+    property var pressureNumberNow
+    property var humidityPercentNow
+    property var sunriseTimeNow
+    property var sunsetTimeNow
+    property var dataCollectedTimeNow
+
     property var name: value
 
 
@@ -71,12 +80,23 @@ App{
                 var responseJSON = JSON.parse(xhr.responseText)
                 weatherNow = responseJSON.weather[0].main
                 tempNow = responseJSON.main.temp
-                tempNow=(tempNow-273.15)*9/5+32
+                locationName=responseJSON.name
+                var ptDate = new Date(responseJSON.sys.sunrise*1000)
+                sunriseTimeNow = ptDate.toLocaleString(Qt.locale("de_DE"), "HH:mm")
+                var ptDate2 = new Date(responseJSON.sys.sunset*1000)
+                sunsetTimeNow = ptDate2.toLocaleString(Qt.locale("de_DE"), "HH:mm")
+                tempMinNumberNow = responseJSON.main.temp_min
+                tempMaxNumberNow = responseJSON.main.temp_max
+                windSpeedNow = responseJSON.wind.speed
+                pressureNumberNow = responseJSON.main.pressure
+                humidityPercentNow = responseJSON.main.humidity
+                var ptDate3 = new Date(responseJSON.dt*1000)
+                dataCollectedTimeNow =ptDate.toLocaleString(Qt.locale("de_DE"), "yyyy-MM-dd HH:mm:ss")
             }
         }
 
         // Define the target of your request
-        xhr.open("GET", "http://api.openweathermap.org/data/2.5/weather?q=Redlands,us&APPID=52235241a93c5deb2028c99639c90403")
+        xhr.open("GET", "http://api.openweathermap.org/data/2.5/weather?q=Redlands,us&&units=imperial&APPID=52235241a93c5deb2028c99639c90403")
         // Execute the request
         xhr.send()
         return tempNow
@@ -100,6 +120,15 @@ App{
         AddressPage{
             descText: locationName
             temperatureNumber: Math.round(tempNow)
+            sunriseTime: sunriseTimeNow
+            sunsetTime: sunsetTimeNow
+            weatherinfoStc: weatherNow
+            tempMinNumber:tempMinNumberNow
+            tempMaxNumber:tempMaxNumberNow
+            windSpeed: windSpeedNow
+            pressureNumber: pressureNumberNow
+            humidityPercent: humidityPercentNow
+            dataCollectedTime: dataCollectedTimeNow
         }
     }
     Component{
