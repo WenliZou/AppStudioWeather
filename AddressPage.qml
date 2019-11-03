@@ -200,10 +200,11 @@ Page {
         }
         Label{
             id:lastUpdateTime
-//            rightPadding: 15
+            rightPadding: 35
             topPadding: 15
             anchors.top: weatherIcon.bottom
             anchors.right:parent.right
+            horizontalAlignment: Qt.AlignRight
             Material.theme: app.lightTheme? Material.Light : Material.Dark
             font.pixelSize: app.titleFontSize*0.5
             wrapMode: Text.Wrap

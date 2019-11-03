@@ -91,7 +91,7 @@ App{
                 pressureNumberNow = responseJSON.main.pressure
                 humidityPercentNow = responseJSON.main.humidity
                 var ptDate3 = new Date(responseJSON.dt*1000)
-                dataCollectedTimeNow =ptDate.toLocaleString(Qt.locale("de_DE"), "yyyy-MM-dd HH:mm:ss")
+                dataCollectedTimeNow =ptDate3.toLocaleString(Qt.locale("de_DE"), "yyyy-MM-dd HH:mm:ss")
             }
         }
 
@@ -99,7 +99,6 @@ App{
         xhr.open("GET", "http://api.openweathermap.org/data/2.5/weather?q=Redlands,us&&units=imperial&APPID=52235241a93c5deb2028c99639c90403")
         // Execute the request
         xhr.send()
-        return tempNow
     }
 
     Loader{
