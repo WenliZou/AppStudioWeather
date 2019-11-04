@@ -30,6 +30,8 @@ import QtGraphicalEffects 1.0
 import ArcGIS.AppFramework 1.0
 import ArcGIS.AppFramework.Controls 1.0
 
+import "./pages"
+
 App{
     id: app
     width: 421
@@ -134,6 +136,8 @@ App{
 
     ContentPage{
         id:content
+        timetest:dataCollectedTimeNow
+        tomorrowtest: tomorrowTimeStamp
     }
 
     StackView {

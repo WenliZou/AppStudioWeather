@@ -68,7 +68,7 @@ Page {
                     anchors.centerIn: parent
                     horizontalAlignment: Qt.AlignRight
                     verticalAlignment: Qt.AlignVCenter
-                    source: "./assets/search.png"
+                    source: "../assets/search.png"
                     fillMode: Image.PreserveAspectFit
                     mipmap: true
                 }
@@ -86,7 +86,7 @@ Page {
                     anchors.centerIn: parent
                     horizontalAlignment: Qt.AlignRight
                     verticalAlignment: Qt.AlignVCenter
-                    source: "./assets/refresh.png"
+                    source: "../assets/refresh.png"
                     fillMode: Image.PreserveAspectFit
                     mipmap: true
 
@@ -105,7 +105,7 @@ Page {
                     anchors.centerIn: parent
                     horizontalAlignment: Qt.AlignRight
                     verticalAlignment: Qt.AlignVCenter
-                    source: "./assets/more.png"
+                    source: "../assets/more.png"
                     fillMode: Image.PreserveAspectFit
                     mipmap: true
                 }

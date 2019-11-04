@@ -19,6 +19,8 @@ Page {
     property var pressureNumberForecast
     property var humidityPercentForecast
     property var weatherIconSourceForecast
+    property var timetest
+    property var tomorrowtest
 
     readonly property string weatherIconSourceUrl: "http://openweathermap.org/img/w/"
 
@@ -139,7 +141,7 @@ Page {
                     anchors.verticalCenter: parent.verticalCenter
                     horizontalAlignment: Qt.AlignVCenter
                     verticalAlignment: Qt.AlignVCenter
-                    source: "./assets/rain_black.png"
+                    source: "../assets/rain_black.png"
                     fillMode: Image.PreserveAspectFit
                     mipmap: true
                 }
@@ -162,20 +164,20 @@ Page {
                     humidityPercentForecast = e.main.humidity
                     weatherIconSourceForecast= e.weather[0].icon
                     timeForecast = e.dt_txt
-                    if(timeForecast.split(" ")[0]==dataCollectedTimeNow.split(" ")[0]){
+                    if(timeForecast.split(" ")[0]==timetest.split(" ")[0]){
                         console.log("1")
-//                        weatherData1.append({"weathertype":weatherForecast})
+                        //                        weatherData1.append({"weathertype":weatherForecast})
 
-                        weatherData1.append({"weathertype":"sun"})
+                        weatherData1.append({weathertype:"sun"})
 
-                    } else if(timeForecast.split(" ")[0]==tomorrowTimeStamp){
+                    } else if(timeForecast.split(" ")[0]==tomorrowtest){
                         console.log("2")
-//                        weatherData2.append({"weathertype":weatherForecast})
-                        weatherData1.append({"weathertype":"sun"})
+                        //                        weatherData2.append({"weathertype":weatherForecast})
+                        weatherData1.append({weathertype:"rain"})
 
                     }else{
                         console.log("3")
-                        weatherData3.append({"weathertype":weatherForecast})
+                        weatherData3.append({weathertype:"windy"})
                     }
                 }
             }
