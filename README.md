@@ -1,8 +1,8 @@
 # AppStudioWeather
 
 
-![alt text](https://github.com/WenliZou/AppStudioWeather/blob/master/page1.PNG)
-![alt text](https://github.com/WenliZou/AppStudioWeather/blob/master/page2.PNG)
+![alt text](https://github.com/WenliZou/AppStudioWeather/blob/master/page1.png)
+![alt text](https://github.com/WenliZou/AppStudioWeather/blob/master/page2.png)
 By Nov. 3rd
 
 Add page 2
