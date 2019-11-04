@@ -1,8 +1,7 @@
 # AppStudioWeather
 
 
-![alt text](https://github.com/WenliZou/AppStudioWeather/blob/master/assets/page1.png)
-![alt text](https://github.com/WenliZou/AppStudioWeather/blob/master/assets/page2.png)
+![alt text](https://github.com/WenliZou/AppStudioWeather/blob/master/assets/page1.png)![alt text](https://github.com/WenliZou/AppStudioWeather/blob/master/assets/page2.png)
 
 By Nov. 3rd
 
