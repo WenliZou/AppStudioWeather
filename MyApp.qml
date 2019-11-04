@@ -66,12 +66,31 @@ App{
     property var humidityPercentNow
     property var sunriseTimeNow
     property var sunsetTimeNow
+    property var todayTime
+    property var tomorrowTime
     property var dataCollectedTimeNow
+    property var tomorrowTimeStamp
+    property var weatherIconSource
+    property var locationLon
+    property var locationLat
+
+
+
+    readonly property string weatherIconSourceUrl: "http://openweathermap.org/img/w/"
 
     property var name: value
 
+    property var urlHead:"http://api.openweathermap.org/data/2.5/"
+    property var urlType:"weather?q="
+    property var urlForecast:"forecast?q="
+    property var urlCity:"Redlands"
+    property var urlTail:"&units=imperial&APPID=52235241a93c5deb2028c99639c90403"
 
-    Component.onCompleted: getWeather()
+
+    Component.onCompleted: {
+        getWeather();
+        content.getForecastWeather();
+    }
 
     function getWeather(){
         var xhr = new XMLHttpRequest
@@ -81,30 +100,46 @@ App{
                 weatherNow = responseJSON.weather[0].main
                 tempNow = responseJSON.main.temp
                 locationName=responseJSON.name
-                var ptDate = new Date(responseJSON.sys.sunrise*1000)
+                var ptDate = new Date((responseJSON.sys.sunrise+28800+responseJSON.timezone)*1000)
                 sunriseTimeNow = ptDate.toLocaleString(Qt.locale("de_DE"), "HH:mm")
-                var ptDate2 = new Date(responseJSON.sys.sunset*1000)
+                var ptDate2 = new Date((responseJSON.sys.sunset+28800+responseJSON.timezone)*1000)
                 sunsetTimeNow = ptDate2.toLocaleString(Qt.locale("de_DE"), "HH:mm")
                 tempMinNumberNow = responseJSON.main.temp_min
                 tempMaxNumberNow = responseJSON.main.temp_max
                 windSpeedNow = responseJSON.wind.speed
                 pressureNumberNow = responseJSON.main.pressure
                 humidityPercentNow = responseJSON.main.humidity
-                var ptDate3 = new Date(responseJSON.dt*1000)
+                todayTime = responseJSON.dt
+                tomorrowTime = todayTime +86400
+                var ptDate3 = new Date(todayTime*1000)
                 dataCollectedTimeNow =ptDate3.toLocaleString(Qt.locale("de_DE"), "yyyy-MM-dd HH:mm:ss")
+                var ptDate4 = new Date(tomorrowTime*1000)
+                tomorrowTimeStamp =ptDate4.toLocaleString(Qt.locale("de_DE"), "yyyy-MM-dd")
+                weatherIconSource=weatherIconSourceUrl + responseJSON.weather[0].icon + ".png";
+                locationLon = responseJSON.coord.lon
+                locationLat = responseJSON.coord.lat
             }
         }
-
-        // Define the target of your request
-        xhr.open("GET", "http://api.openweathermap.org/data/2.5/weather?q=Redlands,us&&units=imperial&APPID=52235241a93c5deb2028c99639c90403")
-        // Execute the request
+        xhr.open("GET",urlHead+urlType+urlCity+urlTail)
         xhr.send()
     }
+
+
 
     Loader{
         id: loader
         anchors.fill: parent
         sourceComponent:page1ViewPage
+    }
+
+    ContentPage{
+        id:content
+    }
+
+    StackView {
+        id: stackView
+        anchors.fill: parent
+        initialItem: page1ViewPage
     }
 
     ListModel{
@@ -128,30 +163,53 @@ App{
             pressureNumber: pressureNumberNow
             humidityPercent: humidityPercentNow
             dataCollectedTime: dataCollectedTimeNow
+            weatherIconSourcePic: weatherIconSource
+            onNext: {
+                stackView.push(mapPage);
+            }
         }
+
     }
+
+    Component{
+        id:mapPage
+        MapPage{
+            mapPageLocation: locationName
+            lon: locationLon
+            lat: locationLat
+            onBack: {
+                stackView.pop();
+            }
+        }
+
+    }
+
     Component{
         id: todayView
         ContentPage{
             descText: qsTr("Today")
+            listModelName:"weatherData1"
         }
     }
     Component{
         id: tomorrowView
         ContentPage{
             descText: qsTr("Tomorrow")
+            listModelName:"weatherData2"
         }
     }
     Component{
         id: laterView
         ContentPage{
             descText: qsTr("Later")
+            listModelName:"weatherData3"
         }
     }
     Component{
         id: tweetView
         ContentPage{
             descText: qsTr("Tweet")
+            listModelName:"weatherData1"
         }
     }
 }

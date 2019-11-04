@@ -2,9 +2,14 @@ import QtQuick 2.7
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.1
 import QtQuick.Controls.Material 2.1
+import Esri.ArcGISRuntime.Toolkit.Controls 100.6
+import Esri.ArcGISRuntime 100.6
+import QtPositioning 5.6
+
 
 Page {
     id: page
+    signal next();
     property var descText
     property var temperatureNumber
     property var tempMinNumber
@@ -16,6 +21,7 @@ Page {
     property var sunriseTime
     property var sunsetTime
     property var dataCollectedTime
+    property var weatherIconSourcePic
     header: ToolBar{
         contentHeight: 56*app.scaleFactor
         Material.primary: app.primaryColor
@@ -35,16 +41,27 @@ Page {
                 Layout.preferredWidth: 16*app.scaleFactor
                 Layout.fillHeight: true
             }
-            Label {
-                Layout.fillWidth: true
+            ToolButton {
+                id: locationButton
                 text: descText > ""? descText:""
-                elide: Label.ElideRight
-                horizontalAlignment: Qt.AlignLeft
-                verticalAlignment: Qt.AlignVCenter
                 font.pixelSize: app.titleFontSize
-                color: app.headerTextColor
+                anchors.left:parent.left
+                anchors.leftMargin: 20
+                contentItem: Text {
+                    text: locationButton.text
+                    font.pixelSize: locationButton.font.pixelSize
+                    Layout.fillWidth: true
+                    elide: Label.ElideRight
+                    horizontalAlignment: Qt.AlignLeft
+                    verticalAlignment: Qt.AlignVCenter
+                    color: app.headerTextColor
+                }
+                onClicked: {
+                    next();
+                }
             }
             ToolButton {
+                anchors.right:refreshButton.left
                 indicator: Image{
                     width: parent.width*0.5
                     height: parent.height*0.5
@@ -57,9 +74,12 @@ Page {
                 }
                 onClicked: {
                     console.log("Search");
+                    searchCity.visible = !searchCity.visible;
                 }
             }
             ToolButton {
+                id: refreshButton
+                anchors.right:moreButton.left
                 indicator: Image{
                     width: parent.width*0.5
                     height: parent.height*0.5
@@ -72,10 +92,13 @@ Page {
 
                 }
                 onClicked: {
-                    console.log("Refresh");
+                    console.log(urlHead+urlType+urlCity+urlTail)
+                    app.getWeather()
                 }
             }
             ToolButton {
+                id: moreButton
+                anchors.right:parent.right
                 indicator: Image{
                     width: parent.width*0.5
                     height: parent.height*0.5
@@ -194,7 +217,8 @@ Page {
             anchors.verticalCenter: parent.verticalCenter
             horizontalAlignment: Qt.AlignVCenter
             verticalAlignment: Qt.AlignVCenter
-            source: "./assets/rain.png"
+            //            source: "./assets/rain.png"
+            source:weatherIconSourcePic
             fillMode: Image.PreserveAspectFit
             mipmap: true
         }
@@ -244,6 +268,36 @@ Page {
         height: parent.height-280-dateSelect.height
         width:parent.width
     }
+    Rectangle {
+        id: searchCity
+        opacity: 0.9
+        width: 120
+        height: 40
+        anchors.rightMargin: 50
+        color: "#f7f8fa"
+        border {
+            color: "#7B7C7D"
+        }
+        visible: false
+        anchors.right: parent.right
+        TextField {
+            id:searchCityText
+            leftPadding: 10
+            placeholderText: "Enter a city"
+            Component.onCompleted: {
+                text ="Redlands";
+            }
+            onAccepted: {
+                app.urlCity=searchCityText.text
+                searchCity.visible=false
+                getWeather()
+//                console.log(urlHead+urlCity+urlTail)
+            }
+        }
+
+    }
+
+
 
     function navigateToPage(index){
         switch(index){
@@ -265,3 +319,14 @@ Page {
 
     }
 }
+
+
+
+
+
+
+
+/*##^## Designer {
+    D{i:0;autoSize:true;height:480;width:640}
+}
+ ##^##*/
