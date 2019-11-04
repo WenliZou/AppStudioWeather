@@ -1,7 +1,14 @@
 # AppStudioWeather
 
 
-![alt text](https://github.com/WenliZou/AppStudioWeather/blob/master/ScreenshotsPage1.PNG)
+![alt text](https://github.com/WenliZou/AppStudioWeather/blob/master/page1.PNG)
+![alt text](https://github.com/WenliZou/AppStudioWeather/blob/master/page2.PNG)
+By Nov. 3rd
+
+Add page 2
+Add page 2 zoom to location
+Add search function
+Add refresh function
 
 By Nov. 2nd
 
