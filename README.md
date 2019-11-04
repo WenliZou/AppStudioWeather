@@ -7,8 +7,11 @@
 By Nov. 3rd
 
 Add page 2
+
 Add page 2 zoom to location
+
 Add search function
+
 Add refresh function
 
 By Nov. 2nd
