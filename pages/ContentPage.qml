@@ -19,8 +19,18 @@ Page {
     property var pressureNumberForecast
     property var humidityPercentForecast
     property var weatherIconSourceForecast
-    property var timetest
-    property var tomorrowtest
+
+    property var todaytext: new Date().toLocaleString(Qt.locale("de_DE"), "yyyy-MM-dd");
+    property var todayTime: new Date().getTime()
+    property var tomorrowTimetest: todayTime+86400000
+    property var tomorrowtext:new Date(tomorrowTimetest).toLocaleString(Qt.locale("de_DE"), "yyyy-MM-dd");
+
+    property var weatherToday
+    property var weatherIconSourceToday
+    property var tempToday
+    property var windToday
+    property var pressureToday
+    property var humidityToday
 
     readonly property string weatherIconSourceUrl: "http://openweathermap.org/img/w/"
 
@@ -39,25 +49,29 @@ Page {
         height: parent.height
         Component.onCompleted: {
             navigateToModel(listModelName);
+            weatherData1.append({
+                                    timeToday:" ",
+                                    weatherType: weatherToday,
+                                    weatherIconSourceType:weatherIconSourceToday,
+                                    tempType:tempToday,
+                                    windType:windToday,
+                                    pressureTypes:pressureToday,
+                                    humidityType:humidityToday
+                                });
+            getForecastWeather();
         }
     }
 
     ListModel{
         id: weatherData1
-        ListElement { weathertype: "sun";
-        }
-
     }
 
     ListModel{
         id: weatherData2
-        ListElement { weathertype: "rain"; }
     }
 
     ListModel{
         id: weatherData3
-
-        ListElement { weathertype: "wind"; }
     }
 
     Component{
@@ -75,7 +89,7 @@ Page {
                     Text {
                         leftPadding: 20
                         id: time
-                        text: "3:00 ~ 6:00"
+                        text: timeToday > ""? timeToday:""
                         opacity:0.6
                         font.pixelSize:app.baseFontSize*0.5
                     }
@@ -83,7 +97,7 @@ Page {
                         leftPadding: 20
                         id: name
                         anchors.top:time.bottom
-                        text: weathertype
+                        text: weatherType > ""? weatherType:""
                         font.pixelSize:app.baseFontSize*0.9
                         font.bold: true
                     }
@@ -94,7 +108,7 @@ Page {
                         anchors.top:name.bottom
                         font.pixelSize: app.baseFontSize*0.7
                         wrapMode: Text.Wrap
-                        text: "3"+" °F"
+                        text:tempType > ""? tempType+" °F":""
                     }
                     Label{
                         id:wind
@@ -104,7 +118,7 @@ Page {
                         anchors.top:temp.bottom
                         font.pixelSize: app.baseFontSize*0.5
                         wrapMode: Text.Wrap
-                        text: "Wind: "+"3"+" miles/s"
+                        text: windType > ""? "Wind: " +windType+" miles/s":""
                     }
                     Label{
                         id:pressure
@@ -114,7 +128,7 @@ Page {
                         anchors.top:wind.bottom
                         font.pixelSize: app.baseFontSize*0.5
                         wrapMode: Text.Wrap
-                        text: "Pressure: "+"1000"+" hPa"
+                        text: pressureTypes > ""? "Pressure: " +pressureTypes+" hpa":""
                     }
                     Label{
                         id:humidity
@@ -124,7 +138,7 @@ Page {
                         anchors.top:pressure.bottom
                         font.pixelSize: app.baseFontSize*0.5
                         wrapMode: Text.Wrap
-                        text: "Humidity: "+"20"+" %"
+                        text: humidityType > ""? "Humidity: " +humidityType+" %":""
                     }
                 }
             }
@@ -141,7 +155,7 @@ Page {
                     anchors.verticalCenter: parent.verticalCenter
                     horizontalAlignment: Qt.AlignVCenter
                     verticalAlignment: Qt.AlignVCenter
-                    source: "../assets/rain_black.png"
+                    source:weatherIconSourceType
                     fillMode: Image.PreserveAspectFit
                     mipmap: true
                 }
@@ -157,27 +171,42 @@ Page {
                 for(var i in responseJSON.list){
                     var e = responseJSON.list[i]
                     weatherForecast = e.weather[0].main
-                    console.log(weatherForecast)
+                    //                    console.log(weatherForecast)
                     tempForecast = e.main.temp
                     windSpeedForecast = e.wind.speed
                     pressureNumberForecast = e.main.pressure
                     humidityPercentForecast = e.main.humidity
-                    weatherIconSourceForecast= e.weather[0].icon
+                    weatherIconSourceForecast= weatherIconSourceUrl+e.weather[0].icon+ ".png"
                     timeForecast = e.dt_txt
-                    if(timeForecast.split(" ")[0]==timetest.split(" ")[0]){
-                        console.log("1")
-                        //                        weatherData1.append({"weathertype":weatherForecast})
+                    if(timeForecast.split(" ")[0]==todaytext){
+                        weatherData1.append(
+                                    {timeToday:timeForecast,
+                                        weatherType: weatherForecast,
+                                        weatherIconSourceType:weatherIconSourceForecast,
+                                        tempType:tempForecast,
+                                        windType:windSpeedForecast,
+                                        pressureTypes:pressureNumberForecast,
+                                        humidityType:humidityPercentForecast})
 
-                        weatherData1.append({weathertype:"sun"})
-
-                    } else if(timeForecast.split(" ")[0]==tomorrowtest){
-                        console.log("2")
-                        //                        weatherData2.append({"weathertype":weatherForecast})
-                        weatherData1.append({weathertype:"rain"})
+                    } else if(timeForecast.split(" ")[0]==tomorrowtext){
+                        weatherData2.append(
+                                    {timeToday:timeForecast,
+                                        weatherType: weatherForecast,
+                                        weatherIconSourceType:weatherIconSourceForecast,
+                                        tempType:tempForecast,
+                                        windType:windSpeedForecast,
+                                        pressureTypes:pressureNumberForecast,
+                                        humidityType:humidityPercentForecast})
 
                     }else{
-                        console.log("3")
-                        weatherData3.append({weathertype:"windy"})
+                        weatherData3.append(
+                                    {timeToday:timeForecast,
+                                        weatherType: weatherForecast,
+                                        weatherIconSourceType:weatherIconSourceForecast,
+                                        tempType:tempForecast,
+                                        windType:windSpeedForecast,
+                                        pressureTypes:pressureNumberForecast,
+                                        humidityType:humidityPercentForecast})
                     }
                 }
             }

@@ -91,7 +91,7 @@ App{
 
     Component.onCompleted: {
         getWeather();
-        content.getForecastWeather();
+//        content.getForecastWeather();
     }
 
     function getWeather(){
@@ -134,11 +134,18 @@ App{
         sourceComponent:page1ViewPage
     }
 
-    ContentPage{
-        id:content
-        timetest:dataCollectedTimeNow
-        tomorrowtest: tomorrowTimeStamp
-    }
+
+    //    Component{
+    //        id:content
+    //        ContentPage{
+    //            weatherToday:weatherNow
+    //            weatherIconSourceToday: weatherIconSource
+    //            tempToday: Math.round(tempNow)
+    //            windToday: windSpeedNow
+    //            pressureToday: pressureNumberNow
+    //            humidityToday: humidityPercentNow
+    //        }
+    //    }
 
     StackView {
         id: stackView
@@ -193,6 +200,25 @@ App{
         ContentPage{
             descText: qsTr("Today")
             listModelName:"weatherData1"
+            weatherToday:weatherNow
+            weatherIconSourceToday: weatherIconSource
+            tempToday: Math.round(tempNow)
+            windToday: windSpeedNow
+            pressureToday: pressureNumberNow
+            humidityToday: humidityPercentNow
+//            Component.onCompleted: {
+//                getForecastWeather();
+//                todayView.weatherData1.append({
+//                                        timeToday:" ",
+//                                        weatherType: weatherToday,
+//                                        weatherIconSourceType:weatherIconSourceToday,
+//                                        tempType:tempToday,
+//                                        windType:windToday,
+//                                        pressureTypes:pressureToday,
+//                                        humidityType:humidityToday
+//                                    });
+//            }
+
         }
     }
     Component{
