@@ -6,6 +6,7 @@
 ![alt text](https://github.com/WenliZou/AppStudioWeather/blob/master/assets/page2.png)
 
 By Nov. 4th
+
 Add Tweet search function which can show the most recent tweets with hashtag #weather
 
 Add Listview which is dynamically appended according to the number of weather forecast got from api. 
