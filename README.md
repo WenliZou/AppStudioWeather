@@ -2,7 +2,7 @@
 
 
 ![alt text](https://github.com/WenliZou/AppStudioWeather/blob/master/assets/page1New.png)
-![alt text](https://github.com/WenliZou/AppStudioWeather/blob/master/assets/pageTweet.png)
+![alt text](https://github.com/WenliZou/AppStudioWeather/blob/master/assets/pageTweetNew.png)
 ![alt text](https://github.com/WenliZou/AppStudioWeather/blob/master/assets/page2.png)
 
 By Nov. 4th
