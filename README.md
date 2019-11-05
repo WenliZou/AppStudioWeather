@@ -3,6 +3,10 @@
 
 ![alt text](https://github.com/WenliZou/AppStudioWeather/blob/master/assets/page1.png)![alt text](https://github.com/WenliZou/AppStudioWeather/blob/master/assets/page2.png)
 
+By Nov. 4th
+
+Add Listview which is dynamically appended according to the number of weather forecast got from api. 
+
 By Nov. 3rd
 
 Add page 2 map view. Pop up when click on location name on page 1. Autometically zoom to the location. 
