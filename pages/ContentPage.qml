@@ -84,14 +84,14 @@ Page {
         id:weatherItem
         Rectangle{
             width: parent.width
-            height: 150
+            height: 120
             Rectangle{
                 id:weatherName
                 width:parent.width/2
                 height: 120
                 y:5
                 Text {
-                    leftPadding: 30
+                    leftPadding: 20
                     id: time
                     text: timeToday > ""? timeToday:""
                     opacity:0.6
@@ -170,14 +170,14 @@ Page {
         id:tweetItem
         Rectangle{
             width: parent.width
-            height: 120
+            height: 140
             Rectangle{
                 id:weatherName
                 width:parent.width
                 height: 120
                 Text {
                     anchors.top:testbutton.bottom
-                    topPadding: 10
+                    topPadding: 20
                     leftPadding: 20
                     id: time
                     text: tweetTime > ""? tweetTime:" "
