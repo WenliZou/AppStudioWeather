@@ -291,7 +291,6 @@ Page {
                 app.urlCity=searchCityText.text
                 searchCity.visible=false
                 getWeather()
-//                console.log(urlHead+urlCity+urlTail)
             }
         }
 
@@ -319,14 +318,3 @@ Page {
 
     }
 }
-
-
-
-
-
-
-
-/*##^## Designer {
-    D{i:0;autoSize:true;height:480;width:640}
-}
- ##^##*/

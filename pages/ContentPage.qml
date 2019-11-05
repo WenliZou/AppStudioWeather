@@ -49,6 +49,7 @@ Page {
         height: parent.height
         Component.onCompleted: {
             navigateToModel(listModelName);
+            getForecastWeather();
             weatherData1.append({
                                     timeToday:" ",
                                     weatherType: weatherToday,
@@ -58,7 +59,7 @@ Page {
                                     pressureTypes:pressureToday,
                                     humidityType:humidityToday
                                 });
-            getForecastWeather();
+
         }
     }
 

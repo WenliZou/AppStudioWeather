@@ -31,6 +31,7 @@ import ArcGIS.AppFramework 1.0
 import ArcGIS.AppFramework.Controls 1.0
 
 import "./pages"
+import "./db"
 
 App{
     id: app
@@ -91,7 +92,7 @@ App{
 
     Component.onCompleted: {
         getWeather();
-//        content.getForecastWeather();
+        //        content.getForecastWeather();
     }
 
     function getWeather(){
@@ -134,19 +135,6 @@ App{
         sourceComponent:page1ViewPage
     }
 
-
-    //    Component{
-    //        id:content
-    //        ContentPage{
-    //            weatherToday:weatherNow
-    //            weatherIconSourceToday: weatherIconSource
-    //            tempToday: Math.round(tempNow)
-    //            windToday: windSpeedNow
-    //            pressureToday: pressureNumberNow
-    //            humidityToday: humidityPercentNow
-    //        }
-    //    }
-
     StackView {
         id: stackView
         anchors.fill: parent
@@ -183,6 +171,14 @@ App{
     }
 
     Component{
+        id:dbexe
+        DbView{
+
+        }
+
+    }
+
+    Component{
         id:mapPage
         MapPage{
             mapPageLocation: locationName
@@ -206,18 +202,6 @@ App{
             windToday: windSpeedNow
             pressureToday: pressureNumberNow
             humidityToday: humidityPercentNow
-//            Component.onCompleted: {
-//                getForecastWeather();
-//                todayView.weatherData1.append({
-//                                        timeToday:" ",
-//                                        weatherType: weatherToday,
-//                                        weatherIconSourceType:weatherIconSourceToday,
-//                                        tempType:tempToday,
-//                                        windType:windToday,
-//                                        pressureTypes:pressureToday,
-//                                        humidityType:humidityToday
-//                                    });
-//            }
 
         }
     }
