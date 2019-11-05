@@ -307,7 +307,6 @@ Page {
             } else {
                 for (var key in objectArray.statuses) {
                     var jsonObject = objectArray.statuses[key];
-                    //                    tweets.append(jsonObject);
                     //                    console.log(jsonObject)
                     var tweetTimeTemp = jsonObject.created_at
                     var tweetNameTemp = jsonObject.user.screen_name

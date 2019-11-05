@@ -87,7 +87,7 @@ App{
     property var urlType:"weather?q="
     property var urlForecast:"forecast?q="
     property var urlCity:"Redlands"
-    property var urlTail:"&units=imperial&APPID=52235241a93c5deb2028c99639c90403"
+    property var urlTail:"&units=imperial&APPID=YOUR API KEY"
 
     property string consumerKey : "YOUR CONSUMER KEY"
     property string consumerSecret : "YOUR CONSUMER SECRET KEY"
