@@ -40,25 +40,26 @@ Page {
     property var urlCity:"Redlands"
     property var urlTail:"&units=imperial&APPID=52235241a93c5deb2028c99639c90403"
 
+    property string consumerKey : "stCqupbbkTOKbqZLjDIYUB9qO"
+    property string consumerSecret : "4L2f8EBw2mSmSLZrIvV6YEDge75UU8nn3JQmVPpsXQYzNNqpPO"
+    property string bearerToken : ""
+
+    property var tweetTime
+    property var tweetName
+    property var tweetText
 
     ListView{
         id:weatherList
-        delegate: weatherItem
+        delegate: listModelName=="tweetModel"?tweetItem:weatherItem
+        //        delegate: weatherItem
         anchors.top:test.bottom;
         width: parent.width
         height: parent.height
         Component.onCompleted: {
+
+            //            tweetSearch();
             navigateToModel(listModelName);
             getForecastWeather();
-            weatherData1.append({
-                                    timeToday:" ",
-                                    weatherType: weatherToday,
-                                    weatherIconSourceType:weatherIconSourceToday,
-                                    tempType:tempToday,
-                                    windType:windToday,
-                                    pressureTypes:pressureToday,
-                                    humidityType:humidityToday
-                                });
 
         }
     }
@@ -75,72 +76,73 @@ Page {
         id: weatherData3
     }
 
+    ListModel{
+        id: tweetModel
+    }
+
     Component{
         id:weatherItem
         Rectangle{
             width: parent.width
-            height: 120
+            height: 150
             Rectangle{
                 id:weatherName
                 width:parent.width/2
                 height: 120
-                Column{
-                    x:5
-                    y:5
-                    Text {
-                        leftPadding: 20
-                        id: time
-                        text: timeToday > ""? timeToday:""
-                        opacity:0.6
-                        font.pixelSize:app.baseFontSize*0.5
-                    }
-                    Text {
-                        leftPadding: 20
-                        id: name
-                        anchors.top:time.bottom
-                        text: weatherType > ""? weatherType:""
-                        font.pixelSize:app.baseFontSize*0.9
-                        font.bold: true
-                    }
-                    Label{
-                        id:temp
-                        leftPadding: 20
-                        topPadding: 5
-                        anchors.top:name.bottom
-                        font.pixelSize: app.baseFontSize*0.7
-                        wrapMode: Text.Wrap
-                        text:tempType > ""? tempType+" °F":""
-                    }
-                    Label{
-                        id:wind
-                        leftPadding: 20
-                        topPadding: 2
-                        opacity:0.5
-                        anchors.top:temp.bottom
-                        font.pixelSize: app.baseFontSize*0.5
-                        wrapMode: Text.Wrap
-                        text: windType > ""? "Wind: " +windType+" miles/s":""
-                    }
-                    Label{
-                        id:pressure
-                        leftPadding: 20
-                        topPadding: 2
-                        opacity:0.5
-                        anchors.top:wind.bottom
-                        font.pixelSize: app.baseFontSize*0.5
-                        wrapMode: Text.Wrap
-                        text: pressureTypes > ""? "Pressure: " +pressureTypes+" hpa":""
-                    }
-                    Label{
-                        id:humidity
-                        leftPadding: 20
-                        topPadding: 2
-                        opacity:0.5
-                        anchors.top:pressure.bottom
-                        font.pixelSize: app.baseFontSize*0.5
-                        wrapMode: Text.Wrap
-                        text: humidityType > ""? "Humidity: " +humidityType+" %":""
-                    }
+                y:5
+                Text {
+                    leftPadding: 30
+                    id: time
+                    text: timeToday > ""? timeToday:""
+                    opacity:0.6
+                    font.pixelSize:app.baseFontSize*0.5
+                }
+                Text {
+                    leftPadding: 20
+                    id: name
+                    anchors.top:time.bottom
+                    text: weatherType > ""? weatherType:""
+                    font.pixelSize:app.baseFontSize*0.9
+                    font.bold: true
+                }
+                Label{
+                    id:temp
+                    leftPadding: 20
+                    topPadding: 5
+                    anchors.top:name.bottom
+                    font.pixelSize: app.baseFontSize*0.7
+                    wrapMode: Text.Wrap
+                    text:tempType > ""? tempType+" °F":""
+                }
+                Label{
+                    id:wind
+                    leftPadding: 20
+                    topPadding: 2
+                    opacity:0.5
+                    anchors.top:temp.bottom
+                    font.pixelSize: app.baseFontSize*0.5
+                    wrapMode: Text.Wrap
+                    text: windType > ""? "Wind: " +windType+" miles/s":""
+                }
+                Label{
+                    id:pressure
+                    leftPadding: 20
+                    topPadding: 2
+                    opacity:0.5
+                    anchors.top:wind.bottom
+                    font.pixelSize: app.baseFontSize*0.5
+                    wrapMode: Text.Wrap
+                    text: pressureTypes > ""? "Pressure: " +pressureTypes+" hpa":""
+                }
+                Label{
+                    id:humidity
+                    leftPadding: 20
+                    topPadding: 2
+                    opacity:0.5
+                    anchors.top:pressure.bottom
+                    font.pixelSize: app.baseFontSize*0.5
+                    wrapMode: Text.Wrap
+                    text: humidityType > ""? "Humidity: " +humidityType+" %":""
                 }
             }
 
@@ -159,6 +161,48 @@ Page {
                     source:weatherIconSourceType
                     fillMode: Image.PreserveAspectFit
                     mipmap: true
+                }
+            }
+        }
+    }
+
+    Component{
+        id:tweetItem
+        Rectangle{
+            width: parent.width
+            height: 120
+            Rectangle{
+                id:weatherName
+                width:parent.width
+                height: 120
+                Text {
+                    anchors.top:testbutton.bottom
+                    topPadding: 10
+                    leftPadding: 20
+                    id: time
+                    text: tweetTime > ""? tweetTime:" "
+                    opacity:0.6
+                    font.pixelSize:app.baseFontSize*0.5
+                }
+                Text {
+                    topPadding: 5
+                    leftPadding: 20
+                    id: name
+                    anchors.top:time.bottom
+                    text: tweetName > ""? tweetName:" "
+                    font.pixelSize:app.baseFontSize*0.9
+                    font.bold: true
+                }
+                Text{
+                    id:temp
+                    leftPadding: 20
+                    topPadding: 5
+                    width:parent.width
+                    anchors.top:name.bottom
+                    font.pixelSize: app.baseFontSize*0.7
+                    wrapMode: Text.WordWrap
+                    Layout.preferredWidth: application_window.width
+                    text:tweetText> ""? tweetText:" "
                 }
             }
         }
@@ -215,17 +259,35 @@ Page {
         xhr.open("GET",urlHead+urlForecast+urlCity+urlTail)
         xhr.send()
     }
+    function appendWeather1(){
+        weatherData1.append({
+                                timeToday:" ",
+                                weatherType: weatherToday,
+                                weatherIconSourceType:weatherIconSourceToday,
+                                tempType:tempToday,
+                                windType:windToday,
+                                pressureTypes:pressureToday,
+                                humidityType:humidityToday
+                            });
+    }
+
+
 
     function navigateToModel(listModelName){
         switch(listModelName){
         case "weatherData1":
             weatherList.model=weatherData1;
+            appendWeather1();
             break;
         case "weatherData2":
             weatherList.model=weatherData2;
             break;
         case "weatherData3":
             weatherList.model=weatherData3;
+            break;
+        case "tweetModel":
+            weatherList.model=tweetModel;
+            load();
             break;
         default:
             break;
@@ -234,8 +296,32 @@ Page {
     }
 
 
+    function load() {
+        //        tweets.clear()
 
-
-
-
+        var req = new XMLHttpRequest;
+        req.open("GET", "https://api.twitter.com/1.1/search/tweets.json?q=%23weather&result_type=recent");
+        req.setRequestHeader("Authorization", "Bearer " + bearerToken);
+        req.onload = function() {
+            var objectArray = JSON.parse(req.responseText);
+            if (objectArray.errors !== undefined) {
+                console.log("Error fetching tweets: " + objectArray.errors[0].message)
+            } else {
+                for (var key in objectArray.statuses) {
+                    var jsonObject = objectArray.statuses[key];
+                    //                    tweets.append(jsonObject);
+                    //                    console.log(jsonObject)
+                    var tweetTimeTemp = jsonObject.created_at
+                    var tweetNameTemp = jsonObject.user.screen_name
+                    var tweetTextTemp = jsonObject.text
+                    tweetModel.append({
+                                          tweetTime:tweetTimeTemp,
+                                          tweetName:tweetNameTemp,
+                                          tweetText:tweetTextTemp
+                                      })
+                }
+            }
+        }
+        req.send();
+    }
 }

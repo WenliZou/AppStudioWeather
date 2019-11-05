@@ -89,43 +89,17 @@ App{
     property var urlCity:"Redlands"
     property var urlTail:"&units=imperial&APPID=52235241a93c5deb2028c99639c90403"
 
+    property string consumerKey : "stCqupbbkTOKbqZLjDIYUB9qO"
+    property string consumerSecret : "4L2f8EBw2mSmSLZrIvV6YEDge75UU8nn3JQmVPpsXQYzNNqpPO"
+    property string firstBearer : ""
 
     Component.onCompleted: {
         getWeather();
+        tweetSearch()
         //        content.getForecastWeather();
     }
 
-    function getWeather(){
-        var xhr = new XMLHttpRequest
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                var responseJSON = JSON.parse(xhr.responseText)
-                weatherNow = responseJSON.weather[0].main
-                tempNow = responseJSON.main.temp
-                locationName=responseJSON.name
-                var ptDate = new Date((responseJSON.sys.sunrise+28800+responseJSON.timezone)*1000)
-                sunriseTimeNow = ptDate.toLocaleString(Qt.locale("de_DE"), "HH:mm")
-                var ptDate2 = new Date((responseJSON.sys.sunset+28800+responseJSON.timezone)*1000)
-                sunsetTimeNow = ptDate2.toLocaleString(Qt.locale("de_DE"), "HH:mm")
-                tempMinNumberNow = responseJSON.main.temp_min
-                tempMaxNumberNow = responseJSON.main.temp_max
-                windSpeedNow = responseJSON.wind.speed
-                pressureNumberNow = responseJSON.main.pressure
-                humidityPercentNow = responseJSON.main.humidity
-                todayTime = responseJSON.dt
-                tomorrowTime = todayTime +86400
-                var ptDate3 = new Date(todayTime*1000)
-                dataCollectedTimeNow =ptDate3.toLocaleString(Qt.locale("de_DE"), "yyyy-MM-dd HH:mm:ss")
-                var ptDate4 = new Date(tomorrowTime*1000)
-                tomorrowTimeStamp =ptDate4.toLocaleString(Qt.locale("de_DE"), "yyyy-MM-dd")
-                weatherIconSource=weatherIconSourceUrl + responseJSON.weather[0].icon + ".png";
-                locationLon = responseJSON.coord.lon
-                locationLat = responseJSON.coord.lat
-            }
-        }
-        xhr.open("GET",urlHead+urlType+urlCity+urlTail)
-        xhr.send()
-    }
+
 
 
 
@@ -170,13 +144,13 @@ App{
 
     }
 
-    Component{
-        id:dbexe
-        DbView{
+    //    Component{
+    //        id:dbexe
+    //        DbView{
 
-        }
+    //        }
 
-    }
+    //    }
 
     Component{
         id:mapPage
@@ -223,8 +197,69 @@ App{
         id: tweetView
         ContentPage{
             descText: qsTr("Tweet")
-            listModelName:"weatherData1"
+            listModelName:"tweetModel"
+            bearerToken:firstBearer
         }
+    }
+
+
+    function getWeather(){
+        var xhr = new XMLHttpRequest
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                var responseJSON = JSON.parse(xhr.responseText)
+                weatherNow = responseJSON.weather[0].main
+                tempNow = responseJSON.main.temp
+                locationName=responseJSON.name
+                var ptDate = new Date((responseJSON.sys.sunrise+28800+responseJSON.timezone)*1000)
+                sunriseTimeNow = ptDate.toLocaleString(Qt.locale("de_DE"), "HH:mm")
+                var ptDate2 = new Date((responseJSON.sys.sunset+28800+responseJSON.timezone)*1000)
+                sunsetTimeNow = ptDate2.toLocaleString(Qt.locale("de_DE"), "HH:mm")
+                tempMinNumberNow = responseJSON.main.temp_min
+                tempMaxNumberNow = responseJSON.main.temp_max
+                windSpeedNow = responseJSON.wind.speed
+                pressureNumberNow = responseJSON.main.pressure
+                humidityPercentNow = responseJSON.main.humidity
+                todayTime = responseJSON.dt
+                tomorrowTime = todayTime +86400
+                var ptDate3 = new Date(todayTime*1000)
+                dataCollectedTimeNow =ptDate3.toLocaleString(Qt.locale("de_DE"), "yyyy-MM-dd HH:mm:ss")
+                var ptDate4 = new Date(tomorrowTime*1000)
+                tomorrowTimeStamp =ptDate4.toLocaleString(Qt.locale("de_DE"), "yyyy-MM-dd")
+                weatherIconSource=weatherIconSourceUrl + responseJSON.weather[0].icon + ".png";
+                locationLon = responseJSON.coord.lon
+                locationLat = responseJSON.coord.lat
+            }
+        }
+        xhr.open("GET",urlHead+urlType+urlCity+urlTail)
+        xhr.send()
+    }
+
+
+    function tweetSearch(){
+        if (consumerKey === "" || consumerSecret == "") {
+            firstBearer = ""
+            return;
+        }
+
+        var authReq = new XMLHttpRequest;
+        authReq.open("POST", "https://api.twitter.com/oauth2/token");
+        authReq.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+        authReq.setRequestHeader("Authorization", "Basic " + Qt.btoa(consumerKey + ":" + consumerSecret));
+        authReq.onreadystatechange = function() {
+            if (authReq.readyState === XMLHttpRequest.DONE) {
+                var jsonResponse = JSON.parse(authReq.responseText);
+                if (jsonResponse.errors !== undefined)
+                    console.log("Authentication error: " + jsonResponse.errors[0].message)
+                else
+                {
+                    firstBearer = jsonResponse.access_token;
+                }
+
+
+            }
+        }
+        authReq.send("grant_type=client_credentials");
     }
 }
 
