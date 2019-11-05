@@ -89,8 +89,8 @@ App{
     property var urlCity:"Redlands"
     property var urlTail:"&units=imperial&APPID=52235241a93c5deb2028c99639c90403"
 
-    property string consumerKey : "stCqupbbkTOKbqZLjDIYUB9qO"
-    property string consumerSecret : "4L2f8EBw2mSmSLZrIvV6YEDge75UU8nn3JQmVPpsXQYzNNqpPO"
+    property string consumerKey : "YOUR CONSUMER KEY"
+    property string consumerSecret : "YOUR CONSUMER SECRET KEY"
     property string firstBearer : ""
 
     Component.onCompleted: {
