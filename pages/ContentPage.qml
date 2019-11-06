@@ -232,6 +232,7 @@ Page {
                                         humidityType:humidityPercentForecast})
 
                     } else if(timeForecast.split(" ")[0]==tomorrowtext){
+                        if(e==0){appendWeather1()}
                         weatherData2.append(
                                     {timeToday:timeForecast,
                                         weatherType: weatherForecast,
@@ -275,7 +276,7 @@ Page {
         switch(listModelName){
         case "weatherData1":
             weatherList.model=weatherData1;
-            appendWeather1();
+            //appendWeather1();
             break;
         case "weatherData2":
             weatherList.model=weatherData2;
