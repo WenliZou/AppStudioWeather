@@ -232,7 +232,7 @@ Page {
                                         humidityType:humidityPercentForecast})
 
                     } else if(timeForecast.split(" ")[0]==tomorrowtext){
-                        if(e==0){appendWeather1()}
+                        if(i==0){appendWeather1()}
                         weatherData2.append(
                                     {timeToday:timeForecast,
                                         weatherType: weatherForecast,
